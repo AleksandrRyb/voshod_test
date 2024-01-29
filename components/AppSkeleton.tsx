@@ -15,7 +15,7 @@ export default function AppSkeleton({ items, ...props}: AppSkeleton) {
             w="100vw"
             h="80vh"
         >
-            {Array.from(Array(items), (s, i) => {
+            {Array.from(Array(items), (_, i) => {
                 return <Skeleton {...props} key={i} w="120px" h="36px" />
             })}
         </Flex>
