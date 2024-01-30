@@ -31,7 +31,7 @@ export default async function Page({params}: { params: { page: string }}) {
         listStyleType="none"
       >
         {
-           taxyData?.items?.map((item: any, index: number)=> {
+           taxyData?.items?.map((item: {id: number, name: string}, index: number)=> {
               return (
                 <ListItem key={index}>
                   <Link href={`/item/${String(item.id)}`}>
