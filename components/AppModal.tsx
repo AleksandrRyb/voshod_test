@@ -18,5 +18,7 @@ export default function AppModal(
         router.back();
     } 
 
-    return <Modal content={text} opened={opened} title={name} onClose={onClose} />
+    return <Modal opened={opened} title={name} onClose={onClose}>
+        {text}
+    </Modal>
 }
