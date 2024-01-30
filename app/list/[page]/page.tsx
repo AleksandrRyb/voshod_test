@@ -1,9 +1,10 @@
 import { List, Flex, ListItem, Button } from '@mantine/core';
+import  Link  from 'next/link';
 import AppPagination from '@/components/AppPagination'
 
 
 
-async function getTaxyData(page: string) {
+async function getData(page: string) {
   const res = await fetch(`https://taxivoshod.ru/testapi/?w=list&page=${page}`);
 
   if(!res.ok) {
@@ -13,8 +14,8 @@ async function getTaxyData(page: string) {
   return res.json()
 }
 
-export default async function Home({ params }: { params: { page: string }}) {
-  const taxyData = await getTaxyData(params.page);
+export default async function Page({params}: { params: { page: string }}) {
+  const taxyData = await getData(params.page);
 
   return (
     <Flex
@@ -30,10 +31,12 @@ export default async function Home({ params }: { params: { page: string }}) {
         listStyleType="none"
       >
         {
-           taxyData?.items?.map((item: any, index: number)=> {
+           taxyData?.items?.map((item: {id: number, name: string}, index: number)=> {
               return (
                 <ListItem key={index}>
-                  <Button w="120px">{item.name}</Button>
+                  <Link href={`/item/${String(item.id)}`}>
+                    <Button w="120px">{item.name}</Button>
+                  </Link>
                 </ListItem>
               )
             })
